@@ -3,7 +3,11 @@
 # The only one that needs changing is the assembler 
 # rule, as we use nasm instead of GNU as.
 
-SOURCES=boot.o main.o
+LOCATION?=./
+
+SOURCES:=boot.c main.c
+SOURCES:=$(SOURCES:.c=.o)
+SOURCES:=$(addprefix $(LOCATION),$(SOURCES))
 
 CFLAGS=-nostdlib -nostdinc -fno-builtin -fno-stack-protector -m32
 LDFLAGS=-TLink.ld -m elf_i386
