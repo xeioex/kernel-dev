@@ -5,7 +5,7 @@
 
 LOCATION?=./
 
-SOURCES:=boot.c main.c
+SOURCES:=boot.c main.c common.c monitor.c
 SOURCES:=$(SOURCES:.c=.o)
 SOURCES:=$(addprefix $(LOCATION),$(SOURCES))
 
