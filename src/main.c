@@ -2,12 +2,16 @@
 // Made for JamesM's tutorials 
 #include "monitor.h"
 #include "common.h"
+#include "descriptor_tables.h"
 
 
 const char * str="Hellow World!";
 
 int main(struct multiboot *mboot_ptr)
 {
+	init_descriptor_tables();
+	
+	
 	int res;
 	char str[256] = "Hello, world!";
 	char str2[256] = "fakafakawaka";
