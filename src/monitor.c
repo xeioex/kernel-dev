@@ -158,19 +158,29 @@ void monitor_write_hex(u32int n)
 	}
 }
 
-void monitor_write_dec(u32int n)
+void monitor_write_dec(s32int n)
 {
+	u32int body = n<0?-n:n;
 	int i = 0;
 	char str[10]={0};
 
-	while(n)
+	if(!body)
 	{
-		str[i]=n%10;
-		n/=10;
+		monitor_put('0');
+		return;
+	}
+
+	while(body)
+	{
+		str[i]=body%10;
+		body /= 10;
 		i++;
 	}
 
-	for(;i>=0;i--)
+	if(n<0)
+		monitor_put('-');
+
+	for(i--;i>=0;i--)
 		monitor_put('0'+str[i]);
 
 	return;

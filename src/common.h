@@ -21,4 +21,18 @@ u16int inw(u16int port);
 void *memset(void *dst, int c, size_t n);
 void *memcpy(void *dst, const void *src, size_t n);
 
+// Compare two strings. Should return -1 if 
+// str1 < str2, 0 if they are equal or 1 otherwise.
+int strcmp(char *str1, char *str2);
+
+int strlen(const char * str);
+
+// Copy the NULL-terminated string src into dest, and
+// return dest.
+char *strcpy(char *dest, const char *src);
+
+// Concatenate the NULL-terminated string src onto
+// the end of dest, and return dest.
+char *strcat(char *dest, const char *src);
+
 #endif
