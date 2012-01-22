@@ -50,6 +50,12 @@ int main(struct multiboot *mboot_ptr)
 		monitor_write("\n\r");
 		monitor_write("strcmp(fakafakawaka,fakafakawaka)=");
 		monitor_write_dec(strcmp(str2,str4));
+		monitor_write("\n\r");
+		strcpy(str4,str);
+		monitor_write(str4);
+		monitor_write("\n\r");
+		monitor_write(str);
+		//memset(0xb8000,76,80*2*5);
 
 		
 	
