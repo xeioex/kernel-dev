@@ -12,7 +12,7 @@ int main(struct multiboot *mboot_ptr)
 	init_descriptor_tables();
 	
 	
-	int res;
+	int res = 0;
 	char str[256] = "Hello, world!";
 	char str2[256] = "fakafakawaka";
 	char str3[256] = "fakafakbwaka";
@@ -61,7 +61,8 @@ int main(struct multiboot *mboot_ptr)
 		monitor_write(str);
 		//memset(0xb8000,76,80*2*5);
 
-		
+		asm volatile ("int $0x3");
+		asm volatile ("int $0x4");
 	
-		return 0xDEADBABA;
+		return 0;
 }

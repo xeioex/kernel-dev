@@ -5,8 +5,7 @@
 
 LOCATION?=./
 
-SOURCES:=boot.c main.c common.c monitor.c descriptor_tables.c dt.c
-SOURCES:=$(SOURCES:.c=.o)
+SOURCES:=boot.o main.o common.o monitor.o descriptor_tables.o dt.o isr.o interrupts.o
 SOURCES:=$(addprefix $(LOCATION),$(SOURCES))
 
 CFLAGS=-nostdlib -nostdinc -fno-builtin -fno-stack-protector -m32
