@@ -2,6 +2,7 @@
 // Made for JamesM's tutorials 
 #include "monitor.h"
 #include "common.h"
+#include "timer.h"
 #include "descriptor_tables.h"
 
 
@@ -18,6 +19,7 @@ int main(struct multiboot *mboot_ptr)
 	char str3[256] = "fakafakbwaka";
 	char str4[256] = "fakafakawaka";
 
+		init_timer(50); // Initialise timer to 50Hz
 	// All our initialisation calls will go in here.
 	  
 		monitor_clear();
@@ -63,6 +65,9 @@ int main(struct multiboot *mboot_ptr)
 
 		asm volatile ("int $0x3");
 		asm volatile ("int $0x4");
+		
+		init_timer(10); // Initialise timer to 50Hz
+		asm volatile ("int $0x5");
 	
 		return 0;
 }
