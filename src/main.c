@@ -19,13 +19,13 @@ int main(struct multiboot *mboot_ptr)
 	char str3[256] = "fakafakbwaka";
 	char str4[256] = "fakafakawaka";
 
-		init_timer(50); // Initialise timer to 50Hz
 	// All our initialisation calls will go in here.
 	  
 		monitor_clear();
 		monitor_write(str);
 		monitor_write("\n\r");
 		monitor_write_hex(0xbadacacd);
+		monitor_write_hex(0xbada0000);
 		monitor_write("\n\r");
 		monitor_write_dec(0xadacacd);
 		monitor_write("\n\r");
@@ -66,8 +66,5 @@ int main(struct multiboot *mboot_ptr)
 		asm volatile ("int $0x3");
 		asm volatile ("int $0x4");
 		
-		init_timer(10); // Initialise timer to 50Hz
-		asm volatile ("int $0x5");
-	
 		return 0;
 }

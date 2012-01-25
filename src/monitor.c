@@ -146,12 +146,12 @@ void monitor_write(char *c)
 
 void monitor_write_hex(u32int n)
 {
+	int i = 8;
+	char hx[16]={'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'};
 	monitor_put('0');
 	monitor_put('x');
 
-	char hx[16]={'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'};
-
-	while(n)
+	while(i--)
 	{
 		monitor_put(hx[(n&(0xf<<28))>>28]);
 		n<<=4;
