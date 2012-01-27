@@ -11,9 +11,9 @@ const char * str="Hellow World!";
 int main(struct multiboot *mboot_ptr)
 {
 	init_descriptor_tables();
+	initialise_paging();
 	
-	
-	int res = 0;
+ 	int res = 0;
 	char str[256] = "Hello, world!";
 	char str2[256] = "fakafakawaka";
 	char str3[256] = "fakafakbwaka";
@@ -66,5 +66,8 @@ int main(struct multiboot *mboot_ptr)
 		asm volatile ("int $0x3");
 		asm volatile ("int $0x4");
 		
+		u32int *ptr = (u32int*)0xA00000;
+		u32int do_page_fault = *ptr;
+
 		return 0;
 }
