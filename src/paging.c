@@ -139,7 +139,7 @@ void initialise_paging()
 		i += 0x1000;
 	}
 	// Before we enable paging, we must register our page fault handler.
-	register_interrupt_handler(14, &page_fault);
+	register_interrupt_handler(14, page_fault);
 
 	// Now, enable paging!
 	switch_page_directory(kernel_directory);
@@ -199,7 +199,7 @@ void page_fault(registers_t regs)
 	if (rw) {monitor_write("read-only ");}
 	if (us) {monitor_write("user-mode ");}
 	if (reserved) {monitor_write("reserved ");}
-	monitor_write(") at 0x");
+	monitor_write(") at ");
 	monitor_write_hex(faulting_address);
 	monitor_write("\n");
 	PANIC("Page fault");

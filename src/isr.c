@@ -9,17 +9,23 @@
 #include "monitor.h"
 #include "hports.h"
 
-#define INTERRUPT_ENTRY_NUMS
+#define INTERRUPT_ENTRY_NUMS 256
 isr_t interrupt_handlers[INTERRUPT_ENTRY_NUMS];
-
-
 
 // This gets called from our ASM interrupt handler stub.
 void isr_handler(registers_t regs)
 {
-	monitor_write("recieved interrupt: ");
-	monitor_write_dec(regs.int_no);
-	monitor_put('\n');
+	if (interrupt_handlers[regs.int_no] != 0)
+	{
+		isr_t handler = interrupt_handlers[regs.int_no];
+		handler(regs);
+	}
+	else
+	{
+		monitor_write("unhandled interrupt: ");
+		monitor_write_dec(regs.int_no);
+		monitor_put('\n');
+	}
 }
 
 
@@ -39,11 +45,23 @@ void irq_handler(registers_t regs)
 	if (interrupt_handlers[regs.int_no] != 0)
 	{
 		isr_t handler = interrupt_handlers[regs.int_no];
+		monitor_write("calling handler: ");
+		monitor_write_hex(handler);
+		monitor_put('\n');
 		handler(regs);
+	}
+	else
+	{
+//		monitor_write("unhandled interrupt: ");
+//		monitor_write_dec(regs.int_no);
+//		monitor_put('\n');
 	}
 }
 
 void register_interrupt_handler(u8int n, isr_t handler)
 {
 	  interrupt_handlers[n] = handler;
+		monitor_write("registering handler: ");
+		monitor_write_hex(handler);
+		monitor_put('\n');
 }

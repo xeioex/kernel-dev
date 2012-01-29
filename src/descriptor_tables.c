@@ -129,7 +129,6 @@ static void init_idt()
 
 	idt_flush((u32int)&idt_ptr);
 
-
 	asm volatile("sti");
 }
 
