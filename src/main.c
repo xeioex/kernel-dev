@@ -4,9 +4,16 @@
 #include "common.h"
 #include "timer.h"
 #include "descriptor_tables.h"
-
+#include "isr.h"
 
 const char * str="Hello World!";
+
+static void keyboard_callback(registers_t regs)
+{
+	monitor_write("keyboard pressed: ");
+	monitor_write("\r\n");
+	register_interrupt_handler(IRQ1, keyboard_callback);
+}
 
 int main(struct multiboot *mboot_ptr)
 {
@@ -14,7 +21,7 @@ int main(struct multiboot *mboot_ptr)
 	init_descriptor_tables();
 	monitor_clear();
 	initialise_paging();
-	init_timer(3);
+//	init_timer(3);
 
 	int res = 0;
 
@@ -33,8 +40,9 @@ int main(struct multiboot *mboot_ptr)
 
 	asm volatile ("int $0x3");
 
-	u32int *ptr = (u32int*)0xA0000000;
-	u32int do_page_fault = *ptr;
+	//u32int *ptr = (u32int*)0x0ffffff;
+	//u32int do_page_fault = *ptr;
+	
 
 	return 0;
 }

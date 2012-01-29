@@ -5,10 +5,10 @@
 
 LOCATION?=./
 
-SOURCES:=boot.o main.o common.o monitor.o descriptor_tables.o dt.o isr.o interrupts.o timer.o kheap.o paging.o
+SOURCES:=boot.o main.o common.o monitor.o descriptor_tables.o dt.o isr.o interrupts.o timer.o kheap.o paging.o debug.o
 SOURCES:=$(addprefix $(LOCATION),$(SOURCES))
 
-CFLAGS=-nostdlib -nostdinc -fno-builtin -fno-stack-protector -m32
+CFLAGS=-nostdlib -nostdinc -fno-builtin -fno-stack-protector -m32 -DKDEBUG
 LDFLAGS=-TLink.ld -m elf_i386
 ASFLAGS=-felf
 
